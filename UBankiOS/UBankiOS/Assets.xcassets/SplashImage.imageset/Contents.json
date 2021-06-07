@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ubank-logo-green-bg.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
