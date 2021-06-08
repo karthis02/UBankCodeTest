@@ -11,7 +11,10 @@ import UIKit
 class TransactionsViewModel: NSObject {
     
     private var apiService : APIService!
-    private(set) var transactionsData : Transactions! {
+    var accountData : AccountsData?
+    private  var transactions: Transactions?
+    
+    private(set) var transactionsData : [TransactionsData]! {
         didSet {
             self.bindTransactionsViewModelToController()
         }
@@ -19,15 +22,30 @@ class TransactionsViewModel: NSObject {
     
     var bindTransactionsViewModelToController : (() -> ()) = {}
     
-    override init() {
+    init(accountData: AccountsData) {
         super.init()
+        self.accountData = accountData
         self.apiService =  APIService()
         callFuncToGetTransactionsData()
     }
     
     func callFuncToGetTransactionsData() {
-        self.apiService.apiToGetTransactionsData { (transactionData) in
-            self.transactionsData = transactionData
-        }
+        let transationUrl = "https://www.ubank.com.au/content/dam/ubank/mobile/coding/transactions_\(accountData?.id ?? "").json"
+        
+        self.apiService.apiToGetTransactionsData (transactionUrl: transationUrl, completion: { (transactionData) in
+            self.transactions = transactionData
+            self.transactionsData = self.sortTransaction()
+        })
+    }
+    
+    func sortTransaction() -> [TransactionsData]? {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        df.locale = Locale(identifier: "en_US_POSIX")
+        df.timeZone = TimeZone(identifier: "UTC")!
+        let sortedTransactions =  self.transactions?.transactions?.sorted(by: {
+            df.date(from:  $0.date ?? "")?.compare( df.date(from:  $1.date ?? "") ?? Date()) == .orderedDescending
+        })
+        return sortedTransactions
     }
 }

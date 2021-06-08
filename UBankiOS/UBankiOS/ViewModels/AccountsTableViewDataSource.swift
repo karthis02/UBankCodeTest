@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
-class AccountsTableViewDataSource<CELL : UITableViewCell,T> : NSObject, UITableViewDataSource {
+protocol TransactionDelegate {
+    func navigateToTransactionScreen(accountData: AccountsData?)
+}
+
+class AccountsTableViewDataSource<CELL : UITableViewCell,T> : NSObject, UITableViewDataSource, UITableViewDelegate {
     
     private var cellIdentifier : String!
     private var items : [T]!
     var configureCell : (CELL, T) -> () = {_,_ in }
-    
+    var delegate : TransactionDelegate?
     
     init(cellIdentifier : String, items : [T], configureCell : @escaping (CELL, T) -> ()) {
         self.cellIdentifier = cellIdentifier
@@ -36,7 +40,7 @@ class AccountsTableViewDataSource<CELL : UITableViewCell,T> : NSObject, UITableV
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
+         let selectedAccount = self.items[indexPath.row] as? AccountsData
+         delegate?.navigateToTransactionScreen(accountData: selectedAccount)
+     }
 }

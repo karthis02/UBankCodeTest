@@ -17,7 +17,8 @@ class TransactionsViewController: UIViewController {
     
     private var dataSource : TransactionsTableViewDataSource<TransactionsTableViewCell,TransactionsData>!
     
-
+    var accountData : AccountsData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureTableViewCell()
@@ -30,8 +31,9 @@ class TransactionsViewController: UIViewController {
     }
     
     func callToViewModelForUIUpdate(){
-        
-        self.transactionsViewModel =  TransactionsViewModel()
+        guard let accData = accountData else { return }
+        self.transactionsViewModel =  TransactionsViewModel(accountData: accData)
+        self.transactionsViewModel.accountData = self.accountData
         self.transactionsViewModel.bindTransactionsViewModelToController = {
             self.updateDataSource()
         }
@@ -39,7 +41,7 @@ class TransactionsViewController: UIViewController {
     
     func updateDataSource() {
         
-        self.dataSource = TransactionsTableViewDataSource(cellIdentifier: "TransactionsTableViewCell", items: self.transactionsViewModel.transactionsData.transactions!, configureCell: { (cell, tvm) in
+        self.dataSource = TransactionsTableViewDataSource(cellIdentifier: "TransactionsTableViewCell", items: self.transactionsViewModel.transactionsData!, configureCell: { (cell, tvm) in
             cell.descriptionLabel.text = tvm.descriptionField
             cell.amountLabel.text = tvm.amount
             cell.runningBalanceLabel.text = tvm.runningBalance

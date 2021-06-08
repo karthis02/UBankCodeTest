@@ -17,6 +17,7 @@ class AccountsViewController: UIViewController {
     
     private var dataSource : AccountsTableViewDataSource<AccountsTableViewCell,AccountsData>!
     
+    private var accountData : AccountsData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +44,26 @@ class AccountsViewController: UIViewController {
             cell.availableBalanceLabel.text = avm.availableBalance
             cell.currentBalanceLabel.text = avm.currentBalance
         })
-        
+        self.dataSource.delegate = self
         DispatchQueue.main.async {
             self.accountsTableView.dataSource = self.dataSource
+            self.accountsTableView.delegate = self.dataSource
             self.accountsTableView.reloadData()
         }
     }
     
 }
 
+//Delegate implementation
+extension AccountsViewController: TransactionDelegate {
+    func navigateToTransactionScreen(accountData: AccountsData?) {
+        self.accountData = accountData
+        self.performSegue(withIdentifier: "showTransactionView", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let transactionsVC = segue.destination as? TransactionsViewController {
+            transactionsVC.accountData = self.accountData
+        }
+    }
+}
