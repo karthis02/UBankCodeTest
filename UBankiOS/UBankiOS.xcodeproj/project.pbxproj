@@ -29,6 +29,8 @@
 		B3E6D9E7266E3F4B0077CFD2 /* TransactionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3E6D9E5266E3F4B0077CFD2 /* TransactionsTableViewCell.xib */; };
 		B3E6D9EA266E3FBC0077CFD2 /* Accounts.json in Resources */ = {isa = PBXBuildFile; fileRef = B3E6D9E8266E3FBC0077CFD2 /* Accounts.json */; };
 		B3E6D9EB266E3FBC0077CFD2 /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = B3E6D9E9266E3FBC0077CFD2 /* Transactions.json */; };
+		B3F48CCA267081A700793F4C /* AccountsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F48CC9267081A700793F4C /* AccountsViewControllerTests.swift */; };
+		B3F48CCC267081C400793F4C /* TransactionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F48CCB267081C400793F4C /* TransactionsViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		B3E6D9E5266E3F4B0077CFD2 /* TransactionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsTableViewCell.xib; sourceTree = "<group>"; };
 		B3E6D9E8266E3FBC0077CFD2 /* Accounts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Accounts.json; sourceTree = "<group>"; };
 		B3E6D9E9266E3FBC0077CFD2 /* Transactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Transactions.json; sourceTree = "<group>"; };
+		B3F48CC9267081A700793F4C /* AccountsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewControllerTests.swift; sourceTree = "<group>"; };
+		B3F48CCB267081C400793F4C /* TransactionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 			children = (
 				B3529E8F266B975200BEB123 /* UBankiOSTests.swift */,
 				B3529E91266B975200BEB123 /* Info.plist */,
+				B3F48CC9267081A700793F4C /* AccountsViewControllerTests.swift */,
+				B3F48CCB267081C400793F4C /* TransactionsViewControllerTests.swift */,
 			);
 			path = UBankiOSTests;
 			sourceTree = "<group>";
@@ -381,6 +387,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3F48CCC267081C400793F4C /* TransactionsViewControllerTests.swift in Sources */,
+				B3F48CCA267081A700793F4C /* AccountsViewControllerTests.swift in Sources */,
 				B3529E90266B975200BEB123 /* UBankiOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
